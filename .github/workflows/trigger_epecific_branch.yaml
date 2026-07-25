@@ -2,7 +2,8 @@ name: push action trigger to specific branch
 on:
     push:
         branches: 
-            - main  
+            - developer 
+ 
 jobs: 
     test: 
         runs-on: ubuntu-latest 
