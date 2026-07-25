@@ -2,8 +2,11 @@ name: helo-world
 on: workflow_dispatch
 jobs: 
   hello-world:
-  runs-on: ubuntu-latest 
+  runs-on: ubuntu-latest
   steps: 
-    - name: hello step 
+    - name: print hello world 
       run: echo "hello world"
+ 
+
+  
     
