@@ -1,0 +1,9 @@
+name: push trigger events 
+on: push 
+jobs: 
+    test: 
+        runs-on: ubuntu-latest 
+        steps:
+            - name: push event trigger 
+              run: echo "hellow world" 
+    
