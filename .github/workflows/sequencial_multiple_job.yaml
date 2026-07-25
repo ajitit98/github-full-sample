@@ -1,0 +1,20 @@
+name: run multiple job sequencial order 
+on: workflow_dispatch
+jobs: 
+    build: 
+        runs-on: ubuntu-latest 
+        steps: 
+            - name: runninh build job
+              run: echo "build job runninh"
+    test: 
+        runs-on: ubuntu-latest 
+        needs: build
+        steps: 
+            - name: running test job 
+              run: echo "runninh test job" 
+    deploy: 
+        runs-on: ubuntu-latest 
+        needs: test
+        steps: 
+            - name: deploy job running
+              run: echo "running depoly job"           
