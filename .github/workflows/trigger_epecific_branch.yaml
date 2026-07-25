@@ -1,0 +1,11 @@
+name: push action trigger to specific branch 
+on:
+    push:
+        branches: 
+            - main  
+jobs: 
+    test: 
+        runs-on: ubuntu-latest 
+        steps:
+            - name: runninh test job 
+              run: echo "running job to specific branch"        
