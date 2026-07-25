@@ -1,0 +1,10 @@
+name: multiple command 
+on: workflow_dispatch 
+jobs: 
+  multiple-commands:
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: print multiple lines messages 
+        run: | 
+          echo "hello world" 
+          echo "welcome to github actions" 
