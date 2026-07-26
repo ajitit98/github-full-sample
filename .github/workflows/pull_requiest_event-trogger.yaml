@@ -1,16 +1,19 @@
-name: event trigger on pull request to specific branch 
+name: run github action on pull request 
 on:
     push:
         branches:
-            - main
+            - main 
+            - developer 
+            - '/releae/**'
     pull_request:
         types:
-            opened
+            - opend
         branches:
             - main
-jobs: 
-    test: 
+jobs:
+    deploy:
         runs-on: ubuntu-latest 
         steps: 
-            - name: running deployment 
-              run: echo "deployment succesful...."            
+            - name: deployed application 
+              run: echo "deployed application"            
+
