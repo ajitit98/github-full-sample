@@ -6,4 +6,4 @@ jobs:
         steps: 
             - name: display variable valuers 
               run: |
-                echo "hello, ${{vars.MY_NAME}}"
+                echo "${{vars.MY_NAME}}"
