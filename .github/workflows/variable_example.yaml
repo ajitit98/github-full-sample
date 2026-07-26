@@ -7,3 +7,4 @@ jobs:
             - name: display variable valuers 
               run: |
                 echo "${{vars.MY_NAME}}"
+                echo "${{secrets.DOCKER_PASS}}"
