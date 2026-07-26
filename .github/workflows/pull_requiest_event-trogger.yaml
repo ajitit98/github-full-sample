@@ -7,7 +7,7 @@ on:
             - '/releae/**'
     pull_request:
         types:
-            - opend
+            - opened
         branches:
             - main
 jobs:
