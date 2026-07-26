@@ -1,0 +1,8 @@
+name: using variable in gitbub actions
+on: workflow_dispatch
+jobs:
+    test_variable:
+        runs-on: ubuntu-latest 
+        steps: 
+            - name: display variable valuers 
+              run: "hello ${{vars.MY_NAME}}"
