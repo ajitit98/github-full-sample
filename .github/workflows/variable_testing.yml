@@ -5,4 +5,4 @@ jobs:
         runs-on: ubuntu-latest 
         steps: 
             - name: display variable valuers 
-              run: "hello ${{vars.MY_NAME}}"
+              run: echo "${{secrets.DOCKER_PASS}}"
