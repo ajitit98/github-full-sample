@@ -1,0 +1,10 @@
+name: or condition demo 
+on:
+    workflow_dispatch 
+jobs:
+    or_job: 
+        runs-on: ubuntu-latest 
+        steps:
+            - name: run this job as ran or ajit 
+              if: github.actor == 'ram' || github.actor == 'ajitit98'    
+              run: echo "running job succesfully ...."
