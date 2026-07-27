@@ -1,0 +1,10 @@
+name: checkout gir repo 
+on: workflow_dispatch
+jobs:
+    checkout_code:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout git code
+              uses: actions/checkout@v7
+            - name: Display html page message
+              run: cat "index.html"  
