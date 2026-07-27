@@ -4,5 +4,5 @@ jobs:
     test_variable:
         runs-on: ubuntu-latest 
         steps: 
-            - name: display variable valuers 
-              run: echo "${{secrets.DOCKER_PASS}}"
+            - name: display variable values 
+              run: echo "hello , ${{secrets.DOCKER_PASS}}"
