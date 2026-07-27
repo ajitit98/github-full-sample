@@ -1,5 +1,5 @@
 name: run github action on pull request 
-on:
+#on:
     push:
         branches:
             - main 
