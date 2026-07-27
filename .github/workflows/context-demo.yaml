@@ -1,0 +1,17 @@
+name: context demo 
+on:
+    workflow_dispatch 
+jobs: 
+    context_demo: 
+        runs-on: ubuntu-latest 
+        steps: 
+            - name: display context variable values 
+              run: |
+               echo "This workflow is trigger by ${{github.actor}}" 
+               echo "This action is performet on ${{github.repository}}" 
+                
+
+
+
+
+
