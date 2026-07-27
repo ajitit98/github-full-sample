@@ -11,6 +11,8 @@ jobs:
                echo "This action is performet on ${{github.repository}}" 
             - name: print all variable in github 
               run: echo "${{toJson(github)}}"   
+            - name: Display enviremnet varaible 
+              run: printenv  
                 
 
 
