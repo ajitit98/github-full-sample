@@ -1,15 +1,16 @@
-name: output demo 
+name: ouptut demo 
 on:
     workflow_dispatch 
-jobs:
+jobs: 
     job1:
         runs-on: ubuntu-latest 
-        steps: 
+        steps:
             - name: step one 
               id: step1
-              run: echo "version=1.20." >> $GITHUB_OUTPUT
-            - name: step two 
-              run: echo "deployment version is ${{steps.step1.outputs.version}}"   
+              run: echo "version=1.29.55" >> $GITHUB_OUTPUT 
+            - name: stage two 
+              run: echo "deployment version ${{steps.step1.outputs.version}}"      
+ 
    
        
         
