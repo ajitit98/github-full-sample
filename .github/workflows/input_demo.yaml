@@ -3,13 +3,22 @@ on:
     workflow_dispatch:
         inputs: 
             environments:
-                description: choose the environment to deploy 
+                type: choice
+                description: choose the environment to deploy
+                required: true
+                default: dev
+                options:
+                    - dev
+                    - qa
+                    - prod
+            artifactury_tags:
+                description: choose the deployment tag
                 required: true 
-                default: dev 
+                        
 jobs: 
     input_demo:
         runs-on: ubuntu-latest 
         steps: 
             - name: deploy application to environment
-              run: echo "Deploy application to ${{inputs.environments}}"
+              run: echo "Deploy application with tag ${{inputs.artifactury_tags}} to ${{inputs.environments}}"
 
