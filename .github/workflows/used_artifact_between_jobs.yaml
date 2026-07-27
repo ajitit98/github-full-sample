@@ -9,7 +9,7 @@ jobs:
         steps: 
             - name: build application 
               id: build
-              run: echo "version:12.56.22" >> $GITHUB_OUTPUT
+              run: echo "version=12.56.22" >> $GITHUB_OUTPUT
     deploy: 
         needs: build
         runs-on: ubuntu-latest 
