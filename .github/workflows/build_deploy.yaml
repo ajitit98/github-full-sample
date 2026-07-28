@@ -1,0 +1,14 @@
+name: build and deploy demo 
+on:
+    pull_request: 
+        types: 
+            - opened 
+            - synchronize
+jobs:
+    build_job:
+        runs-on: ubuntu-latest 
+        steps:
+            - name: build application 
+              run: echo "building application success"            
+
+
