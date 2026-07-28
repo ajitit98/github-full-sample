@@ -1,24 +1,28 @@
-name: build and deploy demo 
+name: Build and Deploy Demo
+
 on:
-    push:
-        branches:
-            - main 
-    pull_request: 
-        types: 
-            - opened 
-            - synchronize
+  push:
+    branches:
+      - main
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
 jobs:
-    build_job:
-        runs-on: ubuntu-latest 
-        if: github.event_name == 'pull_requests'
-        steps:
-            - name: build application 
-              run: echo "building application success....."   
-    deploy_job:
-        runs-on: ubuntu-latest 
-        if: github.event_name == 'push' && github.ref == 'main'
-        steps: 
-            - name: deploy application inti main 
-              run: echo "deploy application ...."                    
+  build_job:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
 
+    steps:
+      - name: Build application
+        run: echo "Building application success..."
 
+  deploy_job:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref_name == 'main'
+
+    steps:
+      - name: Deploy application
+        run: echo "Deploy application..."
