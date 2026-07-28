@@ -8,7 +8,7 @@ on:
 jobs: 
     quality_scan:
         runs-on: ubuntu-latest 
-        if: startsWith(github.ref_name, 'feacture') && github.event_name == 'push'
+        if: startsWith(github.ref_name, 'feature') && github.event_name == 'push'
         steps:
             - name: code quality scan using sonarqube 
               run: echo "scanning code quality using sonarscaner"    
