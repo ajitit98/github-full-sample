@@ -1,40 +1,112 @@
-name: multiple branch demo 
+# Workflow name displayed in the GitHub Actions tab
+name: Multiple Branch Demo
+
+# Trigger the workflow when code is pushed
 on:
-    push:
-        branches: 
-            - main 
-            - develop 
-            - feacture/** 
-jobs: 
-    quality_scan:
-        runs-on: ubuntu-latest 
-        if: startsWith(github.ref_name, 'feature') && github.event_name == 'push'
-        steps:
-            - name: code quality scan using sonarqube 
-              run: echo "scanning code quality using sonarscaner"    
-    dev_deploy:
-        runs-on: ubuntu-latest 
-        steps: 
-            - name: deploy in dev envirement 
-              if: github.event_name == 'develop' && github.event_name == 'push'
-              run: echo "Deploy application in dev envoronment" 
-    prod_deploy: 
-        runs-on: ubuntu-latest 
-        if: github.event_name == 'main' && github.event_name == 'push'
-        steps: 
-            - name: deployed in prod environment 
-              run: echo "deploy in prod environment"    
-    success_notify:
-        runs-on: ubuntu-latest 
-        needs: ['quality_scan','dev_deploy','prod_deploy']
-        if: always() && !failure()      
-        steps: 
-            - name: notify success 
-              run: echo "successs notify send to team" 
-    failure_notify:
-        runs-on: ubuntu-latest 
-        needs: ['quality_scan','dev_deploy','prod_deploy']
-        if: failure()
-        steps: 
-            - name: failure notigy
-              run: echo "failure notify send to team"                                        
+  push:
+    branches:
+      - main          # Trigger on pushes to the main branch
+      - develop       # Trigger on pushes to the develop branch
+      - feature/**    # Trigger on pushes to any feature branch (feature/login, feature/api, etc.)
+
+jobs:
+
+  # ------------------------------------------------------------------
+  # Run code quality scan only for feature branches
+  # ------------------------------------------------------------------
+  quality_scan:
+    runs-on: ubuntu-latest
+
+    # ERROR FIX:
+    # You wrote:
+    # startsWith(github.ref_name, 'feacture')
+    #
+    # Problems:
+    # 1. "feacture" is misspelled.
+    # 2. Branch pattern should match "feature/".
+    if: startsWith(github.ref_name, 'feature/') && github.event_name == 'push'
+
+    steps:
+      - name: Code Quality Scan using SonarQube
+        run: echo "Scanning code quality using SonarScanner"
+
+
+  # ------------------------------------------------------------------
+  # Deploy to Development Environment
+  # ------------------------------------------------------------------
+  dev_deploy:
+    runs-on: ubuntu-latest
+
+    # ERROR FIX:
+    # You wrote:
+    # github.event_name == 'develop'
+    #
+    # github.event_name can only be:
+    # push
+    # pull_request
+    # workflow_dispatch
+    #
+    # It NEVER contains the branch name.
+    #
+    # Branch name is stored in github.ref_name.
+    if: github.ref_name == 'develop' && github.event_name == 'push'
+
+    steps:
+      - name: Deploy in Development Environment
+        run: echo "Deploying application in Development Environment"
+
+
+  # ------------------------------------------------------------------
+  # Deploy to Production Environment
+  # ------------------------------------------------------------------
+  prod_deploy:
+    runs-on: ubuntu-latest
+
+    # ERROR FIX:
+    # You wrote:
+    # github.event_name == 'main'
+    #
+    # "main" is a branch name, not an event.
+    if: github.ref_name == 'main' && github.event_name == 'push'
+
+    steps:
+      - name: Deploy in Production Environment
+        run: echo "Deploying application in Production Environment"
+
+
+  # ------------------------------------------------------------------
+  # Send Success Notification
+  # ------------------------------------------------------------------
+  success_notify:
+    runs-on: ubuntu-latest
+
+    needs:
+      - quality_scan
+      - dev_deploy
+      - prod_deploy
+
+    # Run if all required jobs completed successfully
+    if: always() && !failure()
+
+    steps:
+      - name: Success Notification
+        run: echo "Deployment completed successfully."
+
+
+  # ------------------------------------------------------------------
+  # Send Failure Notification
+  # ------------------------------------------------------------------
+  failure_notify:
+    runs-on: ubuntu-latest
+
+    needs:
+      - quality_scan
+      - dev_deploy
+      - prod_deploy
+
+    # Run only if one of the dependent jobs failed
+    if: failure()
+
+    steps:
+      - name: Failure Notification
+        run: echo "Deployment failed."
