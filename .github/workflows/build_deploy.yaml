@@ -16,7 +16,7 @@ jobs:
               run: echo "building application success....."   
     deploy_job:
         runs-on: ubuntu-latest 
-        if: github.event_name == 'push' && github.ref == 'main'
+        if: github.event_name == 'push' && github.ref_name == 'main'
         steps: 
             - name: deploy application inti main 
               run: echo "deploy application ...."                    
